@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1><%= @menu.title %></h1>
+</p>
+<p>
+  <strong>Date:</strong>
+  <%= @menu.date %>
+</p>
+<p>
+  <%= @menu.description %>
+</p>
+<br>
+<br>
+<h3>Items</h3>
+<% @menu.items.each do |item| %>
+  <p>
+    <strong>Name:</strong>
+    <%= item.name %><br>
+    <strong>Quantity:</strong>
+    <%= item.quantity %><br>
+    <strong>Notes:</strong>
+    <%= item.notes %>
+  </p>
+<% end %>
+<br>
+<br>
+<p>
+  <strong>Add an item to the list:</strong>
+  <%= form_for([@menu, @menu.items.build]) do |f| %>
+<p>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label :quantity %><br>
+  <%= f.number_field :quantity, in:1.0..12.0, step:1.0 %>
+</p>
+<p>
+  <%= f.label :notes %><br>
+  <%= f.text_area :notes %>
+</p>
+<p>
+  <%= f.submit %>
+</p>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_menu_path(@menu) %> |
+<%= link_to 'Back', menus_path %>
